@@ -2,4 +2,10 @@ import numpy             as np
 import pandas            as pd
 import matplotlib.pyplot as plt
 
-pd.read_csv("magic04.data")
+
+cols = ["fLength", "fWidth", "fSize", "fConc", "fConc1", "fAsym",
+        "fM3Long", "fM3Trans", "fAlpha", "fDist", "class"]
+
+df = pd.read_csv("magic04.data", names= cols, nrows=5)
+df.head()
+
