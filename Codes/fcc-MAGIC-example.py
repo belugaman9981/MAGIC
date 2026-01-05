@@ -11,3 +11,5 @@ df.head()
 df["class"] = (df["class"] == "g").astype(int)
 
 print(df)
+
+"""learning stuff"""
