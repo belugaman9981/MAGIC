@@ -12,4 +12,8 @@ df["class"] = (df["class"] == "g").astype(int)
 
 print(df)
 
+for label in cols:
+        plt.hist(df[df["class"] == 1][label])
+        
+
 """learning stuff"""
