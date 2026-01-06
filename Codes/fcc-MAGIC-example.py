@@ -13,7 +13,9 @@ df["class"] = (df["class"] == "g").astype(int)
 print(df)
 
 for label in cols:
-        plt.hist(df[df["class"] == 1][label])
+        plt.hist(df[df["class"] == 1][label], color= 'blue', alpha=0.7, label='gamma', density= True)
+        plt.hist(df[df["class"] == 0][label], color= 'red', alpha=0.7, label='hadron', density= True)
+        
         
 
 """learning stuff"""
