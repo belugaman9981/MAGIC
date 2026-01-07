@@ -24,3 +24,5 @@ for label in cols[:-1]:
 # Well
 
 """learning stuff"""
+
+train, valid, test = np.split(df.sample(frac= 1), [int(.6 * len(df)), int(.8 * len(df))])
