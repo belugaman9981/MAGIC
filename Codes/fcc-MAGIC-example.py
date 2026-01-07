@@ -35,4 +35,9 @@ def scale_dataset(data):
     scaler = StandardScaler()
     X = scaler.fit_transform(X)
     
-    data = np.hstack((X, y))
+    data = np.hstack((X, np.reshape(y, (-1, 1))))
+    
+    return data
+
+print(len(train[train["class"] == 1]))
+print(len(train[train["class"] == 0]))
