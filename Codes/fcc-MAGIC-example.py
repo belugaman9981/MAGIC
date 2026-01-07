@@ -1,6 +1,7 @@
 import numpy             as np
 import pandas            as pd
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
 
 
 cols = ["fLength", "fWidth", "fSize", "fConc", "fConc1", "fAsym",
@@ -26,3 +27,9 @@ for label in cols[:-1]:
 """learning stuff"""
 
 train, valid, test = np.split(df.sample(frac= 1), [int(.6 * len(df)), int(.8 * len(df))])
+
+def scale_dataset(data):
+    x = data[data.columns[:-1]].values
+    y = data[data.columns[-1]].values
+    
+    
