@@ -1,7 +1,8 @@
-import numpy                as np
-import pandas               as pd
-import matplotlib.pyplot    as plt
-from  sklearn.preprocessing import StandardScaler
+import numpy                  as np
+import pandas                 as pd
+import matplotlib.pyplot      as plt
+from   sklearn.preprocessing  import StandardScaler
+from   imblearn.over_sampling import RandomOverSampler
 
 
 cols = ["fLength", "fWidth", "fSize", "fConc", "fConc1", "fAsym",
@@ -28,16 +29,21 @@ for label in cols[:-1]:
 
 train, valid, test = np.split(df.sample(frac= 1), [int(.6 * len(df)), int(.8 * len(df))])
 
-def scale_dataset(data):
+def scale_dataset(data, oversample= False):
     x = data[data.columns[:-1]].values
     y = data[data.columns[-1]].values
     
     scaler = StandardScaler()
     X = scaler.fit_transform(X)
     
+    if oversample:
+        ros = RandomOverSampler()
+        X, y = ros.fit_resample(X, y)
+    
     data = np.hstack((X, np.reshape(y, (-1, 1))))
     
     return data
 
-print(len(train[train["class"] == 1]))
-print(len(train[train["class"] == 0]))
+train, X_train, y_train = scale_dataset(train, oversample= True)
+valid, X_valid, y_valid = scale_dataset(valid, oversample= False)
+test, X_test, y_test    = scale_dataset(test, oversample= False)
