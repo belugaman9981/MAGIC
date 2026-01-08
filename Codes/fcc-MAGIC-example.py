@@ -47,3 +47,18 @@ def scale_dataset(data, oversample= False):
 train, X_train, y_train = scale_dataset(train, oversample= True)
 valid, X_valid, y_valid = scale_dataset(valid, oversample= False)
 test, X_test, y_test    = scale_dataset(test, oversample= False)
+
+# Learning about pork aka K-Nearest Neighbors
+
+
+# kNN
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics   import classification_report, confusion_matrix
+
+knn_model = KNeighborsClassifier(n_neighbors= 5)
+knn_model.fit(X_train, y_train)
+
+y_pred = knn_model.predict(X_test)
+
+print(classification_report(y_test, y_pred))
