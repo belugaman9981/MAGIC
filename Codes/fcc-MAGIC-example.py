@@ -62,3 +62,5 @@ knn_model.fit(X_train, y_train)
 y_pred = knn_model.predict(X_test)
 
 print(classification_report(y_test, y_pred))
+
+# covid knn thingy
