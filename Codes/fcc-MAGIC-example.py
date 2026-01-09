@@ -63,4 +63,4 @@ y_pred = knn_model.predict(X_test)
 
 print(classification_report(y_test, y_pred))
 
-# covid knn thingy + more
+# covid knn thingy + percentage that you have it
