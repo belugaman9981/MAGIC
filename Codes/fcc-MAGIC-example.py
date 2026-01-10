@@ -64,3 +64,8 @@ y_pred = knn_model.predict(X_test)
 print(classification_report(y_test, y_pred))
 
 
+from sklearn.naive_bayes import GaussianNB
+
+nb_model = GaussianNB()
+nb_model.fit(X_train, y_train)
+
