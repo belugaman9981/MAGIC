@@ -69,3 +69,16 @@ from sklearn.naive_bayes import GaussianNB
 nb_model = GaussianNB()
 nb_model.fit(X_train, y_train)
 
+y_pred = nb_model.predict(X_test)
+print(classification_report(y_test, y_pred))
+
+# talking about Logistic Regression
+
+
+# Logistic Regression
+
+from sklearn.linear_model import LogisticRegression
+
+lg_model = LogisticRegression(max_iter= 1000)
+lg_model = lg_model.fit(X_train, y_train)
+
