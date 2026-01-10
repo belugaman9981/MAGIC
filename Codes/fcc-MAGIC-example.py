@@ -81,3 +81,4 @@ from sklearn.linear_model import LogisticRegression
 
 lg_model = LogisticRegression(max_iter= 1000)
 lg_model = lg_model.fit(X_train, y_train)
+
