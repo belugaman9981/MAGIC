@@ -82,3 +82,14 @@ from sklearn.linear_model import LogisticRegression
 lg_model = LogisticRegression(max_iter= 1000)
 lg_model = lg_model.fit(X_train, y_train)
 
+
+# SVM
+
+from sklearn.svm import SVC
+
+svm_model = SVC()
+svm_model = svm_model.fit(X_train, y_train)
+
+y_pred = svm_model.predict(X_test)
+print(classification_report(y_test, y_pred))
+
