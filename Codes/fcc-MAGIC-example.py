@@ -137,7 +137,8 @@ nn_model.compile(optimizer= tf.keras.optimizers.Adam(learning_rate= 0.001),
                  )
 
 history = nn_model.fit(X_train, y_train,
-                       epochs= 100, batch_size= 32,
-                        validation_split= 0.2
+                       epochs= 100, batch_size= 32, 
+                       validation_split= 0.2, 
+                       verbose= 0
                         )
 
