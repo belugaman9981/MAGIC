@@ -34,7 +34,7 @@ def scale_dataset(data, oversample= False):
     y = data[data.columns[-1]].values
     
     scaler = StandardScaler()
-    X = scaler.fit_transform(X)
+    X = scaler.fit_transform(x)
     
     if oversample:
         ros = RandomOverSampler()
@@ -86,6 +86,8 @@ from sklearn.linear_model import LogisticRegression
 lg_model = LogisticRegression(max_iter= 1000)
 lg_model = lg_model.fit(X_train, y_train)
 
+# learning about Support Vector Machines
+
 
 # SVM
 
@@ -97,3 +99,6 @@ svm_model = svm_model.fit(X_train, y_train)
 y_pred = svm_model.predict(X_test)
 print(classification_report(y_test, y_pred))
 
+# learning about neural networks
+
+# Neural Networks + tensorflow
