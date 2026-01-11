@@ -34,7 +34,7 @@ def scale_dataset(data, oversample= False):
     y = data[data.columns[-1]].values
     
     scaler = StandardScaler()
-    X = scaler.fit_transform(X)
+    X = scaler.fit_transform(x)
     
     if oversample:
         ros = RandomOverSampler()
@@ -63,6 +63,10 @@ y_pred = knn_model.predict(X_test)
 
 print(classification_report(y_test, y_pred))
 
+# talking about Naive Bayes
+
+
+# Naive Bayes
 
 from sklearn.naive_bayes import GaussianNB
 
@@ -81,4 +85,60 @@ from sklearn.linear_model import LogisticRegression
 
 lg_model = LogisticRegression(max_iter= 1000)
 lg_model = lg_model.fit(X_train, y_train)
+
+# learning about Support Vector Machines
+
+
+# SVM
+
+from sklearn.svm import SVC
+
+svm_model = SVC()
+svm_model = svm_model.fit(X_train, y_train)
+
+y_pred = svm_model.predict(X_test)
+print(classification_report(y_test, y_pred))
+
+# learning about neural networks
+
+
+# Neural Networks + tensorflow
+
+import tensorflow as tf
+
+def plot_loss(history):
+    plt.plot(history.history['loss'], label= 'train loss')
+    plt.plot(history.history['val_loss'], label= 'val loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+    
+def plot_accuracy(history):
+    plt.plot(history.history['accuracy'], label= 'train accuracy')
+    plt.plot(history.history['val_accuracy'], label= 'val accuracy')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+nn_model = tf.keras.Sequential([
+    tf.keras.layers.Dense(32, activation= 'relu', input_shape= (10, )),
+    tf.keras.layers.Dense(32, activation= 'relu'),
+    tf.keras.layers.Dense(1, activation= 'sigmoid')
+    
+])
+
+nn_model.compile(optimizer= tf.keras.optimizers.Adam(learning_rate= 0.001),
+                 loss= 'binary_crossentropy',
+                 metrics= ['accuracy']
+                 )
+
+history = nn_model.fit(X_train, y_train,
+                       epochs= 100, batch_size= 32, 
+                       validation_split= 0.2, 
+                       verbose= 0
+                        )
 
