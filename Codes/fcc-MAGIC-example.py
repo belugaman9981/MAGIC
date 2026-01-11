@@ -106,10 +106,32 @@ print(classification_report(y_test, y_pred))
 
 import tensorflow as tf
 
+def plot_loss(history):
+    plt.plot(history.history['loss'], label= 'train loss')
+    plt.plot(history.history['val_loss'], label= 'val loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+    
+def plot_accuracy(history):
+    plt.plot(history.history['accuracy'], label= 'train accuracy')
+    plt.plot(history.history['val_accuracy'], label= 'val accuracy')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
 nn_model = tf.keras.Sequential([
     tf.keras.layers.Dense(32, activation= 'relu', input_shape= (10, )),
     tf.keras.layers.Dense(32, activation= 'relu'),
     tf.keras.layers.Dense(1, activation= 'sigmoid')
     
 ])
+
+nn_model.compile(optimizer= tf.keras.optimizers.Adam(learning_rate= 0.001),
+                 loss= 'binary_crossentropy',
+                 metrics= ['accuracy'])
 
