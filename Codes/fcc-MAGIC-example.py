@@ -133,5 +133,11 @@ nn_model = tf.keras.Sequential([
 
 nn_model.compile(optimizer= tf.keras.optimizers.Adam(learning_rate= 0.001),
                  loss= 'binary_crossentropy',
-                 metrics= ['accuracy'])
+                 metrics= ['accuracy']
+                 )
+
+history = nn_model.fit(X_train, y_train,
+                       epochs= 100, batch_size= 32,
+                        validation_split= 0.2
+                        )
 
