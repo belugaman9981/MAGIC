@@ -118,16 +118,8 @@ def plot_loss(history):
     ax2.plot(history.history['val_accuracy'], label='val_accuracy')
     ax2.xlabel('Epoch')
     ax2.ylabel('Accuracy')
+    ax2.grid(True)
     
-    plt.show()
-    
-def plot_accuracy(history):
-    plt.plot(history.history['accuracy'], label= 'train accuracy')
-    plt.plot(history.history['val_accuracy'], label= 'val accuracy')
-    plt.xlabel('Epoch')
-    plt.ylabel('Accuracy')
-    plt.legend()
-    plt.grid(True)
     plt.show()
 
 
