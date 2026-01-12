@@ -125,7 +125,7 @@ def plot_accuracy(history):
     plt.show()
 
 
-def train_mod(X_train, y_train, num_nodes, dropout_prob, batch_size, learning_rate, num_epochs):
+def train_mod(X_train, y_train, num_nodes, dropout_prob, batch_size, lr, num_epochs):
         
     nn_model = tf.keras.Sequential([
         tf.keras.layers.Dense(32, activation= 'relu', input_shape= (10, )),
@@ -136,17 +136,18 @@ def train_mod(X_train, y_train, num_nodes, dropout_prob, batch_size, learning_ra
         
     ])
 
-    nn_model.compile(optimizer= tf.keras.optimizers.Adam(learning_rate= 0.001),
+    nn_model.compile(optimizer= tf.keras.optimizers.Adam(lr), 
                     loss= 'binary_crossentropy',
                     metrics= ['accuracy']
                     )
     
-
-
-
-history = nn_model.fit(X_train, y_train,
-                       epochs= 100, batch_size= 32, 
-                       validation_split= 0.2, 
-                       verbose= 0
+    history = nn_model.fit(X_train, 
+        y_train, epochs= num_epochs, batch_size= batch_size, 
+        validation_split= 0.2, verbose= 0
                         )
+    
+    return nn_model, history
+    
+    
+
 
