@@ -107,12 +107,18 @@ print(classification_report(y_test, y_pred))
 import tensorflow as tf
 
 def plot_loss(history):
-    plt.plot(history.history['loss'], label= 'train loss')
-    plt.plot(history.history['val_loss'], label= 'val loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
-    plt.legend()
-    plt.grid(True)
+    fig, (axl, ax2) = plt.subplots(1, 2)
+    axl.plot(history.history['loss'), label='loss')
+    axl.plot(history.history['val_loss'], label='val_loss')
+    axl.xlabel('Epoch')
+    axl.ylabel('Binary crossentropy')
+    axl.grid(True)
+    
+    ax2.plot(history.history['accuracy'], label='accuracy')
+    ax2.plot(history.history['val_accuracy'], label='val_accuracy')
+    ax2.xlabel('Epoch')
+    ax2.ylabel('Accuracy')
+    
     plt.show()
     
 def plot_accuracy(history):
