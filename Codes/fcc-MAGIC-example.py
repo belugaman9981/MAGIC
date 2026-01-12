@@ -108,7 +108,7 @@ import tensorflow as tf
 
 def plot_loss(history):
     fig, (axl, ax2) = plt.subplots(1, 2)
-    axl.plot(history.history['loss'), label='loss')
+    axl.plot(history.history['loss'], label='loss')
     axl.plot(history.history['val_loss'], label='val_loss')
     axl.xlabel('Epoch')
     axl.ylabel('Binary crossentropy')
