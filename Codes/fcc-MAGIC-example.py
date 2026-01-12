@@ -107,38 +107,55 @@ print(classification_report(y_test, y_pred))
 import tensorflow as tf
 
 def plot_loss(history):
-    plt.plot(history.history['loss'], label= 'train loss')
-    plt.plot(history.history['val_loss'], label= 'val loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+    fig, (axl, ax2) = plt.subplots(1, 2, figsize= (10, 4))
+    axl.plot(history.history['loss'], label='loss')
+    axl.plot(history.history['val_loss'], label='val_loss')
+    axl.set_xlabel('Epoch')
+    axl.set_ylabel('Binary crossentropy')
+    axl.grid(True)
     
-def plot_accuracy(history):
-    plt.plot(history.history['accuracy'], label= 'train accuracy')
-    plt.plot(history.history['val_accuracy'], label= 'val accuracy')
-    plt.xlabel('Epoch')
-    plt.ylabel('Accuracy')
-    plt.legend()
-    plt.grid(True)
+    ax2.plot(history.history['accuracy'], label='accuracy')
+    ax2.plot(history.history['val_accuracy'], label='val_accuracy')
+    ax2.xlabel('Epoch')
+    ax2.ylabel('Accuracy')
+    ax2.grid(True)
+    
     plt.show()
 
-nn_model = tf.keras.Sequential([
-    tf.keras.layers.Dense(32, activation= 'relu', input_shape= (10, )),
-    tf.keras.layers.Dense(32, activation= 'relu'),
-    tf.keras.layers.Dense(1, activation= 'sigmoid')
+
+def train_mod(X_train, y_train, num_nodes, dropout_prob, batch_size, lr, num_epochs):
+        
+    nn_model = tf.keras.Sequential([
+        tf.keras.layers.Dense(32, activation= 'relu', input_shape= (10, )),
+        tf.keras.layers.Dropout(dropout_prob),
+        tf.keras.layers.Dense(32, activation= 'relu'),
+        tf.keras.layers.Dropout(dropout_prob),
+        tf.keras.layers.Dense(1, activation= 'sigmoid')
+        
+    ])
+
+    nn_model.compile(optimizer= tf.keras.optimizers.Adam(lr), 
+                    loss= 'binary_crossentropy',
+                    metrics= ['accuracy']
+                    )
     
-])
-
-nn_model.compile(optimizer= tf.keras.optimizers.Adam(learning_rate= 0.001),
-                 loss= 'binary_crossentropy',
-                 metrics= ['accuracy']
-                 )
-
-history = nn_model.fit(X_train, y_train,
-                       epochs= 100, batch_size= 32, 
-                       validation_split= 0.2, 
-                       verbose= 0
+    history = nn_model.fit(X_train, 
+        y_train, epochs= num_epochs, batch_size= batch_size, 
+        validation_split= 0.2, verbose= 0
                         )
+    
+    return nn_model, history
+    
+    
+epochhhs = 100
+
+for num_nodes in [16, 32, 64]:
+    for dropout_prob in [0, 0.2]:
+        for lr in [0.01, 0.005, 0.001]:
+            for batch_size in [16, 32, 64]:
+                model, history = train_mod(X_train, y_train, num_nodes, dropout_prob, batch_size, lr, epochhhs)
+                plot_loss(history)
+                plot_accuracy(history)
+                
+
 
