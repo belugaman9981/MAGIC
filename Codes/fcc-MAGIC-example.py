@@ -107,11 +107,11 @@ print(classification_report(y_test, y_pred))
 import tensorflow as tf
 
 def plot_loss(history):
-    fig, (axl, ax2) = plt.subplots(1, 2)
+    fig, (axl, ax2) = plt.subplots(1, 2, figsize= (10, 4))
     axl.plot(history.history['loss'], label='loss')
     axl.plot(history.history['val_loss'], label='val_loss')
-    axl.xlabel('Epoch')
-    axl.ylabel('Binary crossentropy')
+    axl.set_xlabel('Epoch')
+    axl.set_ylabel('Binary crossentropy')
     axl.grid(True)
     
     ax2.plot(history.history['accuracy'], label='accuracy')
