@@ -149,5 +149,15 @@ def train_mod(X_train, y_train, num_nodes, dropout_prob, batch_size, lr, num_epo
     return nn_model, history
     
     
+epochhhs = 100
+
+for num_nodes in [16, 32, 64]:
+    for dropout_prob in [0, 0.2]:
+        for lr in [0.01, 0.005, 0.001]:
+            for batch_size in [16, 32, 64]:
+                model, history = train_mod(X_train, y_train, num_nodes, dropout_prob, batch_size, lr, epochhhs)
+                plot_loss(history)
+                plot_accuracy(history)
+                
 
 
