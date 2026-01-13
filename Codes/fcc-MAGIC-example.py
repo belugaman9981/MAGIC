@@ -165,7 +165,6 @@ for num_nodes in [16, 32, 64]:
                 if val_loss < least_val_loss:
                     least_val_loss  = val_loss
                     least_val_model = model
-                
-                
+                            
 
 
