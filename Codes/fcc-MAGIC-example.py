@@ -106,7 +106,7 @@ print(classification_report(y_test, y_pred))
 
 import tensorflow as tf
 
-def plot_loss(history):
+def plot_history(history):
     fig, (axl, ax2) = plt.subplots(1, 2, figsize= (10, 4))
     axl.plot(history.history['loss'], label='loss')
     axl.plot(history.history['val_loss'], label='val_loss')
@@ -147,15 +147,25 @@ def train_mod(X_train, y_train, num_nodes, dropout_prob, batch_size, lr, num_epo
     return nn_model, history
     
     
+    
+    
+least_val_loss  = float('inf')
+least_val_model = None
 epochhhs = 100
 
 for num_nodes in [16, 32, 64]:
     for dropout_prob in [0, 0.2]:
         for lr in [0.01, 0.005, 0.001]:
             for batch_size in [16, 32, 64]:
+                print(f"{num_nodes}, nodes, {dropout_prob}, dropout, {lr}, lr, {batch_size}, batch_size")
                 model, history = train_mod(X_train, y_train, num_nodes, dropout_prob, batch_size, lr, epochhhs)
-                plot_loss(history)
-                plot_accuracy(history)
+                plot_history(history)
+                val_loss = model.evaluate(X_valid, y_valid)
+                
+                if val_loss < least_val_loss:
+                    least_val_loss  = val_loss
+                    least_val_model = model
+                
                 
 
 
