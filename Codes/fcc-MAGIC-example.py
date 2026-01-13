@@ -173,4 +173,3 @@ y_pred = (y_pred > 0.5).astype(int).reshape(-1)
 
 print(classification_report(y_test, y_pred))
 
-67
